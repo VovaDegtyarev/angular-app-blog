@@ -1,35 +1,24 @@
-<div class="post">
-  <div class="header">
-    <h1>Post title</h1>
+<div *ngIf="post$ | async as post; else loading">
+  <div class="post">
+    <div class="header">
+      <h1>{{post.title}}</h1>
 
-    <button routerLink="/" class="btn btn-link">На главную</button>
+      <button routerLink="/" class="btn btn-link">На главную</button>
+    </div>
+
+    <div class="info">
+      <strong>{{post.author}}</strong>
+      <small>{{post.date | date: 'medium':null:'ru'}}</small>
+    </div>
+
+
+    <div>
+      <quill-view-html [content]="post.text"></quill-view-html>
+    </div>
+
   </div>
-
-  <div class="info">
-    <strong>Автор поста</strong>
-    <small>01.01.0001</small>
-  </div>
-
-
-  <div>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur ad, id dolorum ipsa et,
-      fugiat corporis tempore vero officia necessitatibus ex nam aliquam nihil modi placeat doloribus repellendus reiciendis.
-      Deserunt ab temporibus earum minus sed voluptate inventore, dicta, iure consectetur at quidem praesentium corrupti tempora officia.
-      Suscipit ipsa culpa reiciendis!
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur ad, id dolorum ipsa et,
-      fugiat corporis tempore vero officia necessitatibus ex nam aliquam nihil modi placeat doloribus repellendus reiciendis.
-      Deserunt ab temporibus earum minus sed voluptate inventore, dicta, iure consectetur at quidem praesentium corrupti tempora officia.
-      Suscipit ipsa culpa reiciendis!
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur ad, id dolorum ipsa et,
-      fugiat corporis tempore vero officia necessitatibus ex nam aliquam nihil modi placeat doloribus repellendus reiciendis.
-      Deserunt ab temporibus earum minus sed voluptate inventore, dicta, iure consectetur at quidem praesentium corrupti tempora officia.
-      Suscipit ipsa culpa reiciendis!
-    </p>
-  </div>
-
 </div>
+
+<ng-template #loading>
+  <p class="text-center">Загрузка поста...</p>
+</ng-template>
